@@ -1,6 +1,6 @@
-# ExpressJS Template
+# VIDEODROME
 
-This is a simple ExpressJS api template.
+This is a simple application that serves your video files on the network.
 
 ## Installation
 
