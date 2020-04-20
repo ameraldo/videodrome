@@ -1,0 +1,7 @@
+extends default
+
+block content
+    div(class="container-sm mt-4 mb-4")
+      div(class="wrapper")
+        video(class="video", controls, autoplay)
+          source(src="/video/stream?path="+ path)

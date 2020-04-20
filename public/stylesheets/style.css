@@ -1,0 +1,33 @@
+.wrapper{
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+.video{
+  width: 320px;
+}
+
+@media (min-width: 576px) {
+  .video{
+    width: 480px;
+  }
+}
+
+@media (min-width: 768px) {
+  .video{
+    width: 640px;
+  }
+}
+
+@media (min-width: 992px) {
+  .video{
+    width: 720px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .video{
+    width: 1080px;
+  }
+}

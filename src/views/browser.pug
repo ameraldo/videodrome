@@ -1,0 +1,15 @@
+extends default
+
+block content
+    div(class="container-sm mt-4 mb-4")
+      div(class="list-group")
+        a(href="/browse?path=" + path.previousPath, class="list-group-item list-group-item-action active")
+          i(class="far fa-folder-open")
+          span &nbsp; ../
+        each item in dir
+          if item.type == 'dir'
+            a(href="/browse?path=" + path.currentPath + "/" + item.name, class="list-group-item list-group-item-action")
+              i(class="far fa-folder") &nbsp; #{item.name}
+          else if item.type == 'file'
+            a(href="/video?path=" + path.currentPath + "/" + item.name , class="list-group-item list-group-item-action")
+              i(class="far fa-file-video") &nbsp; #{item.name}
