@@ -7,10 +7,8 @@ const config = require('config');
 const app = require('../app');
 const logger = require('../src/logger');
 
-
 // Set port.
 app.set('port', config.port);
-
 
 // Create http server.
 const server = http.createServer(app);
@@ -21,12 +19,11 @@ function serverInfo(port) {
   let info = '';
   Object.keys(interfaces).forEach((i) => {
     interfaces[i].forEach((iface) => {
-      if (iface.family === 'IPv4') info += `\x1b[34m${iface.address}:${port}\n`;
+      if (iface.family === 'IPv4') info += `\x1b[34m${iface.address}:${port}\x1b[0m\n`;
     });
   });
   logger.info(`Server started on: \n${info}`);
 }
-
 
 // Listen to port.
 function onError(error) {

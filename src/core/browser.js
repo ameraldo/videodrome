@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
+const logger = require('../logger');
+
 const rootDir = os.homedir();
 
 /**
@@ -53,23 +55,28 @@ function checkFile(fileName) {
   const supportedMimeTypes = ['mp4', 'ogg', 'ogv', 'webm'];
   const splitFile = fileName.split('.');
   const mimeType = splitFile[splitFile.length - 1];
-  const supported = supportedMimeTypes.includes(mimeType);
-  return { supported, mimeType };
+  function isSupported() {
+    return supportedMimeTypes.includes(mimeType);
+  }
+  return { isSupported, mimeType };
 }
 
 module.exports = async (req, res) => {
   const currentPath = req.query.path ? req.query.path : '';
   const previousPath = getPreviousPath(currentPath);
-
-  const response = await readDir(path.join(rootDir, currentPath));
   const dir = [];
-  response.forEach((item) => {
-    if (item.stats.isDirectory()) {
-      dir.push({ name: item.name, type: 'dir' });
-    } else if (item.stats.isFile() && checkFile(item.name).supported) {
-      dir.push({ name: item.name, type: 'file' });
-    }
-  });
 
+  try {
+    const response = await readDir(path.join(rootDir, currentPath));
+    response.forEach((item) => {
+      if (item.stats.isDirectory()) {
+        dir.push({ name: item.name, type: 'dir' });
+      } else if (item.stats.isFile() && checkFile(item.name).isSupported()) {
+        dir.push({ name: item.name, type: 'file' });
+      }
+    });
+  } catch (error) {
+    logger.error(error);
+  }
   res.render('browser', { dir, path: { currentPath, previousPath } });
 };
