@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-
 const rootDir = os.homedir();
 
 function checkFile(filePath) {
@@ -26,7 +25,6 @@ function getStats(filePath) {
     });
   });
 }
-
 
 module.exports = {
   async view(req, res) {

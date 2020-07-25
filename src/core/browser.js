@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-
 const rootDir = os.homedir();
 
 /**
@@ -57,7 +56,6 @@ function checkFile(fileName) {
   const supported = supportedMimeTypes.includes(mimeType);
   return { supported, mimeType };
 }
-
 
 module.exports = async (req, res) => {
   const currentPath = req.query.path ? req.query.path : '';
