@@ -51,7 +51,7 @@ function getPreviousPath(currentPath) {
 }
 
 function checkFile(fileName) {
-  const supportedMimeTypes = ['avi', 'mpeg', 'mp4', 'ogg', 'ogv', 'ts', 'webm', '3gp', '3g2'];
+  const supportedMimeTypes = ['mp4', 'ogg', 'ogv', 'webm'];
   const splitFile = fileName.split('.');
   const mimeType = splitFile[splitFile.length - 1];
   const supported = supportedMimeTypes.includes(mimeType);
