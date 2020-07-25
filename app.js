@@ -20,5 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('short', { stream: logger.stream }));
 
 app.use('/', router);
+app.use((req, res) => res.status(404).redirect('/'));
 
 module.exports = app;
